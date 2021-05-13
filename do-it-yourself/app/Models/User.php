@@ -19,10 +19,18 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'profile_img',
         'username',
         'password',
 
     ];
+
+    public function profileImage()
+    {
+        $imagePath = ($this->profile_img) ? $this->profile_img : '/img/no-profile-image.png';
+        // dd($imagePath);
+        return $imagePath;
+    }
 
     /**
      * The attributes that should be hidden for arrays.
