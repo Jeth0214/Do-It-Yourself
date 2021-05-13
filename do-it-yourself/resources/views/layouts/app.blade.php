@@ -29,7 +29,7 @@
                     {{ config('app.name', 'Laravel') }}
                 </a> -->
 
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('/home') }}">
                     <img src="/img/diy-logo.png" width="50" height="50" alt="Do it Yourself logo">
                     <span class="pt-2 text-yellow"> Do It Yourself</span>
                 </a>
@@ -53,21 +53,32 @@
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link text-yellow" href="{{ route('register') }}">
+                            <a class="nav-link text-yellow " href="{{ route('register') }}">
                                 <span class="text-yellow">{{ __('Register') }}</span></a>
                         </li>
                         @endif
                         @else
+                        <li class="nav-item d-flex align-items-center ">
+                            <a href="/profile/{{Auth::user()->id}}" class="d-md-block d-none">
+                                <img src="{{ Auth::user()->profileImage()}}" width="30" height="30" alt="Do it Yourself logo" class="rounded-circle">
+                            </a>
+                            <!-- <a href="/profile/{{Auth::user()->id}}">
+                                <img src="/img/no-profile-image.png" width="30" height="30" alt="Do it Yourself logo" class="img-thumbnail">
+                            </a> -->
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-yellow" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="text-yellow">{{ Auth::user()->name }}</span>
+                                <span class="text-yellow">{{ Auth::user()->username }}</span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a href="/profile/{{Auth::user()->id}}" class="dropdown-item">Your Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
