@@ -10023,6 +10023,35 @@ h3 {
   height: 100%;
 }
 
+.progress {
+  position: relative;
+  width: 100%;
+  border: 1px solid #7F98B2;
+  padding: 1px;
+  border-radius: 3px;
+}
+.progress .bar {
+  background-color: #B4F5B4;
+  width: 0%;
+  height: 25px;
+  border-radius: 3px;
+}
+.progress .percent {
+  position: absolute;
+  display: inline-block;
+  top: 3px;
+  left: 48%;
+  color: #7F98B2;
+}
+
+textarea {
+  min-height: 200px !important;
+}
+
+.card.ideas {
+  height: 400px;
+}
+
 .text-yellow {
   color: #FEEE92;
 }

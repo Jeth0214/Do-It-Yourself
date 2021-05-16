@@ -104,7 +104,7 @@ class ProfileController extends Controller
                 $request->profile_img->storeAs($base_image_url, $user->username . "-" . $now->getTimeStamp() . "." . $extension);
                 $url = Storage::url('public/profile/images/' . $user->username . "-" . $now->getTimeStamp() . "." . $extension);
                 $user->profile_img = $url;
-                // dd($url);
+                //dd($url);
                 $imageArray = ['profile_img' => $url];
             }
         }

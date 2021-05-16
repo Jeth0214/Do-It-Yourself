@@ -10,7 +10,7 @@
                 <img src="{{ $user->profileImage()}}" alt="No Image Logo" class="profile-image img-thumbnail">
             </div>
 
-            <div class="card border border-primary">
+            <div class="card mt-3 border border-primary">
                 <div class="card-content pt-5 text-center">
                     <h3>{{$user->name}}</h3>
                     <p class="mb-0">{{$user->profile->username}}</p>
@@ -23,7 +23,7 @@
                             <p> 3 ideas saved</p>
                         </div>
                         <div class="col-6 text-left">
-                            <p> 4 ideas created</p>
+                            <p> {{$user->ideas->count()}} ideas created</p>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
                                 Edit Profile
                             </span>
                         </a>
-                        <a href="#" class="btn btn-primary">
+                        <a href="/ideas/create" class="btn btn-primary">
                             <span class="text-yellow">
                                 Add Ideas
                             </span>
@@ -46,6 +46,42 @@
 
             </div>
         </div>
+    </div>
+
+    <div class="row">
+
+        @foreach ($user->ideas as $idea)
+        <div class="col-md-4 my-3">
+            <div class="card ideas">
+                <video class="w-100" height="240" controls>
+                    <source src="{{$idea->video}}" type="video/mp4">
+                </video>
+
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-1">{{ $idea->caption}}</h5>
+                    <small class="text-muted">
+                        <span>Posted: </span>
+                        @php
+                        $date=date_create("$idea->created_at");
+                        echo date_format($date,"m/d/Y H:i:a");
+                        @endphp
+                    </small>
+
+                    <p class="mt-3">
+                        @php
+                        echo substr($idea->instructions,0,40)
+                        @endphp
+                        ...
+                    </p>
+
+                    <a href="/profile/{{$idea->user->id}}/ideas/{{$idea->id}}" class="card-link">More Details</a>
+                </div>
+            </div>
+        </div>
+
+        @endforeach
+
+
     </div>
 </div>
 
