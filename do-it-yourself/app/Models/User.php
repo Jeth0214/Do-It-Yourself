@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $imagePath;
     }
 
+    public function ideas()
+    {
+        return $this->hasMany(Ideas::class)->orderBy('created_at', 'DESC');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

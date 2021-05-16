@@ -1,0 +1,120 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card border border-primary">
+                <div class="card-header text-center">
+                    <h4 class="text-primary">Add Idea</h4>
+                </div>
+                <div class="card-body px-5">
+                    <form id="form" action="/ideas" enctype="multipart/form-data" method="post">
+                        @csrf
+
+                        <!-- caption  -->
+                        <div class="form-group ">
+                            <label for="caption" class="col-form-label text-primary">Caption</label>
+                            <input id="caption" type="text" class="form-control @error('caption') is-invalid @enderror" name="caption" value="{{ old('caption') }}" autocomplete="caption">
+
+                            @error('caption')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <!-- Materials  -->
+                        <div class="form-group ">
+                            <label for="materials" class="col-form-label text-primary">Materials ( comma "," seperated )</label>
+                            <textarea id="materials" class="form-control @error('materials') is-invalid @enderror" name="materials" value="{{ old('materials') }}" autocomplete="materials">
+
+                            </textarea>
+
+                            @error('materials')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <!-- Instruction  -->
+                        <div class="form-group ">
+                            <label for="instructions" class="col-form-label text-primary">Instructions</label>
+                            <textarea id="instructions" cols="30" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') }}" autocomplete="instructions">
+
+                            </textarea>
+
+                            @error('materials')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <!-- <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                        </div> -->
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                0%
+                            </div>
+                        </div>
+                        <!-- Video   -->
+                        <div class="form-group">
+                            <label for="video" class="text-primary">Upload video</label>
+                            <input id="video" type="file" class="form-control-file @error('video') is-invalid @enderror" name="video" value="{{ old('video')}}">
+
+                            @error('video')
+                            <strong class="invalid-feedback">{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+
+                        <div class="d-flex justify-content-between pt-5">
+                            <div class="">
+                                <!-- <button class="btn btn-primary text-yellow">Add</button> -->
+                                <input type="submit" value="Submit" class="btn btn-primary text-yellow">
+                            </div>
+                            <div class="">
+                                <a class="btn btn-primary text-yellow" href="/profile/{{$user->id}}">Back to Profile</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script> -->
+
+
+
+<!-- <script>
+    //var SITEURL = "{{URL('/')}}";
+    $(function() {
+        $(document).ready(function() {
+            var bar = $('.bar');
+            var percent = $('.percent');
+            $('#form').ajaxForm({
+                beforeSend: function() {
+                    var percentVal = '0%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                uploadProgress: function(event, position, total, percentComplete) {
+                    var percentVal = percentComplete + '%';
+                    bar.width(percentVal)
+                    percent.html(percentVal);
+                },
+                complete: function(xhr) {
+                    alert('File Has Been Uploaded Successfully');
+                    //window.location.href = SITEURL + "/" + "ajax-file-upload-progress-bar";
+                }
+            });
+        });
+    });
+</script> -->
