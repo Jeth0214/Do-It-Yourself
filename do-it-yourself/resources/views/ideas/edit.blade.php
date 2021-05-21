@@ -6,16 +6,16 @@
         <div class="col-md-8 offset-md-2">
             <div class="card border border-primary">
                 <div class="card-header text-center">
-                    <h4 class="text-primary">Add Idea</h4>
+                    <h4 class="text-primary">Edit Idea</h4>
                 </div>
                 <div class="card-body px-5">
-                    <form id="form" action="/ideas" enctype="multipart/form-data" method="post">
+                    <form id="form" action="/ideas/{{$idea->id}}" enctype="multipart/form-data" method="post">
                         @csrf
-
+                        @method('PATCH')
                         <!-- caption  -->
                         <div class="form-group ">
                             <label for="caption" class="col-form-label text-primary">Caption</label>
-                            <input id="caption" type="text" class="form-control @error('caption') is-invalid @enderror" name="caption" value="{{ old('caption') }}" autocomplete="caption">
+                            <input id="caption" type="text" class="form-control @error('caption') is-invalid @enderror" name="caption" value="{{ old('caption') ?? $idea->caption }} " autocomplete="caption">
 
                             @error('caption')
                             <span class="invalid-feedback" role="alert">
@@ -27,8 +27,7 @@
                         <!-- Materials  -->
                         <div class="form-group ">
                             <label for="materials" class="col-form-label text-primary">Materials ( comma "," seperated )</label>
-                            <textarea id="materials" class="form-control @error('materials') is-invalid @enderror" name="materials" value="{{ old('materials') }}" autocomplete="materials">
-
+                            <textarea id="materials" class="form-control @error('materials') is-invalid @enderror" name="materials" value="{{ old('materials') }}" autocomplete="materials">{{ $idea->materials }}
                             </textarea>
 
                             @error('materials')
@@ -41,8 +40,7 @@
                         <!-- Instruction  -->
                         <div class="form-group ">
                             <label for="instructions" class="col-form-label text-primary">Instructions</label>
-                            <textarea id="instructions" cols="30" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') }}" autocomplete="instructions">
-
+                            <textarea id="instructions" cols="30" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') }}" autocomplete="instructions">{{$idea->instructions}}
                             </textarea>
 
                             @error('materials')
@@ -55,8 +53,9 @@
                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                         </div> -->
                         <div class="progress">
-                            <div class="bar"></div>
-                            <div class="percent">0%</div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                0%
+                            </div>
                         </div>
                         <!-- Video   -->
                         <div class="form-group">
@@ -71,8 +70,8 @@
 
                         <div class="d-flex justify-content-between pt-5">
                             <div class="">
-                                <!-- <button class="btn btn-primary text-yellow">Add</button> -->
-                                <input type="submit" value="Submit" class="btn btn-primary text-yellow">
+                                <button class="btn btn-primary text-yellow">Update</button>
+                                <!-- <input type="submit" value="Upadt" class="btn btn-primary text-yellow"> -->
                             </div>
                             <div class="">
                                 <a class="btn btn-primary text-yellow" href="/profile/{{$user->id}}">Back to Profile</a>

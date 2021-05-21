@@ -11,8 +11,8 @@ class Ideas extends Model
 
     public $guarded = [];
 
-    public function user()
+    public function User()
     {
-        return $this->belongsTo(User::class);
+        $this->belongsTo(User::class);
     }
 }

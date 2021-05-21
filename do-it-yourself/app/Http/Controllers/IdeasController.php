@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Ideas;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class IdeasController extends Controller
 {
@@ -76,8 +78,7 @@ class IdeasController extends Controller
             'materials' => $data['materials'],
             'video' => $request->video,
         ]);
-
-        return redirect("/profile/" . auth()->user()->id);
+        return redirect("/profile/" . auth()->user()->id)->with('success', 'Idea created successfully');;
     }
 
     /**
@@ -86,9 +87,11 @@ class IdeasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Ideas $idea)
     {
-        //
+        //dd($idea);
+        $user = auth()->user();
+        return view('ideas.show', compact('idea', 'user'));
     }
 
     /**
@@ -97,9 +100,13 @@ class IdeasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ideas $idea, User $user)
     {
         //
+        //$user = auth()->user();
+        $this->authorize('update', $user->ideas);
+
+        return view('ideas.edit', compact('idea', 'user'));
     }
 
     /**
@@ -109,9 +116,43 @@ class IdeasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, User $user)
     {
         //
+        $idea = Ideas::findOrFail($id);
+        //dd($idea->video);
+        $data =  $request->validate([
+            'caption' => 'required',
+            'video' => 'mimes:mp4,ogx,oga,ogv,ogg,webm,qt | max:1000000',
+            'materials' => 'required',
+            'instructions' => 'required'
+        ]);
+
+        //dd($request->all());
+
+        $base_image_url = '/public/ideas/videos';
+        $now = new \DateTime();
+        if ($request->hasFile('video')) {
+            if ($request->file('video')->isValid()) {
+                $extension = $request->video->extension(); // get image file extension
+                $request->video->storeAs($base_image_url, auth()->user()->username . "-" . $now->getTimeStamp() . "." . $extension);
+                $url = Storage::url('public/ideas/videos/' . auth()->user()->username . "-" . $now->getTimeStamp() . "." . $extension);
+                $data['video'] = $url;
+                // dd($url);
+                // $videoArray = ['video' => $url];
+            }
+        } else {
+            $data['video'] = $idea->video;
+        }
+
+        //dd($data);
+        $idea->update([
+            'caption' => $data['caption'],
+            'instructions' => $data['instructions'],
+            'materials' => $data['materials'],
+            'video' => $data['video'],
+        ]);
+        return redirect("/profile/" . auth()->user()->id)->with('success', 'Idea updated successfully');;
     }
 
     /**
@@ -120,9 +161,13 @@ class IdeasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ideas $idea, User $user)
     {
+
         //
+        $this->authorize('delete', $user->ideas);
+        $idea->delete();
+        return redirect("/profile/" . auth()->user()->id)->with('success', 'Idea deleted successfully');
     }
 
     //     public function getVideo(Video $video)

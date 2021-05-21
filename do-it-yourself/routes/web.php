@@ -29,6 +29,11 @@ Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::clas
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update']);
 
 //Ideas route
+//Route::resource('ideas', [IdeasController::class]);
 Route::get('/ideas/create', [App\Http\Controllers\IdeasController::class, 'create']);
 Route::post('ideas', [App\Http\Controllers\IdeasController::class, 'store']);
+Route::get('/ideas/{idea}', [App\Http\Controllers\IdeasController::class, 'show']);
+Route::get('/ideas/{idea}/edit', [App\Http\Controllers\IdeasController::class, 'edit']);
+Route::patch('/ideas/{idea}', [App\Http\Controllers\IdeasController::class, 'update']);
+Route::delete('/ideas/{idea}', [App\Http\Controllers\IdeasController::class, 'destroy']);
 // Route::post('get-video/{video}', [App\Http\Controllers\IdeasController::class, 'getVideo'])->name('getVideo');

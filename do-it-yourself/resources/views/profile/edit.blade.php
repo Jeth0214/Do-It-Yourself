@@ -9,7 +9,7 @@
                     <h4 class="text-primary">Edit Profile</h4>
                 </div>
                 <div class="card-body px-5">
-                    <form action="/profile/{{$user->id}}" enctype="multipart/form-data" method="post">
+                    <form id="profile-form" action="/profile/{{$user->id}}" enctype="multipart/form-data" method="post">
                         @csrf
                         @method('PATCH')
                         <div class="form-group ">
@@ -106,7 +106,7 @@
                                 <button class="btn btn-primary text-yellow">Save Profile</button>
                             </div>
                             <div class="">
-                                <a class="btn btn-primary text-yellow" href="/profile/{{$user->id}}">Back to Profile</a>
+                                <a class="btn btn-primary text-yellow" href="/profile/{{$user}}">Back to Profile</a>
                             </div>
                         </div>
 
@@ -118,3 +118,12 @@
 </div>
 
 @endsection
+<script>
+    // wait for the DOM to be loaded
+    $(document).ready(function() {
+        // bind 'myForm' and provide a simple callback function
+        $('.profile-form').ajaxForm(function() {
+            alert("Thank you for your comment!");
+        });
+    });
+</script>
