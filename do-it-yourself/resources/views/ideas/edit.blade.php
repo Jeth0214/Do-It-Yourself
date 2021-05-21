@@ -1,7 +1,15 @@
 @extends('layouts.app')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 @section('content')
 <div class="container">
+    <div class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-text text-primary">
+            Updating...
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card border border-primary">
@@ -49,14 +57,6 @@
                             </span>
                             @enderror
                         </div>
-                        <!-- <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                        </div> -->
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                0%
-                            </div>
-                        </div>
                         <!-- Video   -->
                         <div class="form-group">
                             <label for="video" class="text-primary">Upload video</label>
@@ -70,7 +70,7 @@
 
                         <div class="d-flex justify-content-between pt-5">
                             <div class="">
-                                <button class="btn btn-primary text-yellow">Update</button>
+                                <button class="btn btn-primary text-yellow" id="update">Update</button>
                                 <!-- <input type="submit" value="Upadt" class="btn btn-primary text-yellow"> -->
                             </div>
                             <div class="">
@@ -86,3 +86,16 @@
 </div>
 
 @endsection
+<script>
+    // wait for the DOM to be loaded
+    $(document).ready(function() {
+
+        var spinner = $('.spinner-container');
+        spinner.hide();
+
+        $("#update").click(function() {
+            spinner.show();
+        })
+
+    });
+</script>

@@ -11,13 +11,10 @@
     <title>Do It YourSelf</title>
 
     <!-- Scripts -->
-
-
-
-
-
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/jQuery-form.js') }}" defer></script>
+
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -110,31 +107,7 @@
     </div>
 
 
-    <script type="text/javascript">
-        // var SITEURL = "{{URL('/')}}";
-        $(function() {
-            $(document).ready(function() {
-                var bar = $('.bar');
-                var percent = $('.percent');
-                $('form').ajaxForm({
-                    beforeSend: function() {
-                        var percentVal = '0%';
-                        bar.width(percentVal)
-                        percent.html(percentVal);
-                    },
-                    uploadProgress: function(event, position, total, percentComplete) {
-                        var percentVal = percentComplete + '%';
-                        bar.width(percentVal)
-                        percent.html(percentVal);
-                    },
-                    complete: function(xhr) {
-                        alert('File Has Been Uploaded Successfully');
-                        window.location.href = SITEURL + "/" + "ajax-file-upload-progress-bar";
-                    }
-                });
-            });
-        });
-    </script>
+
 </body>
 
 </html>
