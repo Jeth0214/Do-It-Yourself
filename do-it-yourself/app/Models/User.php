@@ -25,17 +25,7 @@ class User extends Authenticatable
 
     ];
 
-    public function profileImage()
-    {
-        $imagePath = ($this->profile_img) ? $this->profile_img : '/img/no-profile-image.png';
-        // dd($imagePath);
-        return $imagePath;
-    }
 
-    public function ideas()
-    {
-        return $this->hasMany(Ideas::class)->orderBy('created_at', 'DESC');
-    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -70,5 +60,17 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function profileImage()
+    {
+        $imagePath = ($this->profile_img) ? $this->profile_img : '/img/no-profile-image.png';
+        // dd($imagePath);
+        return $imagePath;
+    }
+
+    public function ideas()
+    {
+        return $this->hasMany(Ideas::class)->orderBy('created_at', 'DESC');
     }
 }

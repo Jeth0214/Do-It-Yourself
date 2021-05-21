@@ -11,11 +11,20 @@
     <title>Do It YourSelf</title>
 
     <!-- Scripts -->
+
+
+
+
+
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/jQuery-form.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -62,7 +71,10 @@
                         @else
                         <li class="nav-item d-flex align-items-center ">
                             <a href="/profile/{{Auth::user()->id}}" class="d-md-block d-none">
-                                <img src="{{ Auth::user()->profileImage()}}" width="30" height="30" alt="Do it Yourself logo" class="rounded-circle">
+                                <div class="nav-profile-image">
+                                    <img src="{{ Auth::user()->profileImage()}}" width="30" height="30" alt="Do it Yourself logo" class="rounded-circle">
+                                </div>
+
                             </a>
                             <!-- <a href="/profile/{{Auth::user()->id}}">
                                 <img src="/img/no-profile-image.png" width="30" height="30" alt="Do it Yourself logo" class="img-thumbnail">
@@ -97,6 +109,32 @@
         </main>
     </div>
 
+
+    <script type="text/javascript">
+        // var SITEURL = "{{URL('/')}}";
+        $(function() {
+            $(document).ready(function() {
+                var bar = $('.bar');
+                var percent = $('.percent');
+                $('form').ajaxForm({
+                    beforeSend: function() {
+                        var percentVal = '0%';
+                        bar.width(percentVal)
+                        percent.html(percentVal);
+                    },
+                    uploadProgress: function(event, position, total, percentComplete) {
+                        var percentVal = percentComplete + '%';
+                        bar.width(percentVal)
+                        percent.html(percentVal);
+                    },
+                    complete: function(xhr) {
+                        alert('File Has Been Uploaded Successfully');
+                        window.location.href = SITEURL + "/" + "ajax-file-upload-progress-bar";
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -48,12 +48,21 @@
         </div>
     </div>
 
-    <div class="row">
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
+        <strong>Success</strong> {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
 
+    <div class="row">
+        @if ($user->ideas)
         @foreach ($user->ideas as $idea)
         <div class="col-md-4 my-3">
             <div class="card ideas">
-                <video class="w-100" height="240" controls>
+                <video class="w-100" controls>
                     <source src="{{$idea->video}}" type="video/mp4">
                 </video>
 
@@ -74,15 +83,22 @@
                         ...
                     </p>
 
-                    <a href="/profile/{{$idea->user->id}}/ideas/{{$idea->id}}" class="card-link">More Details</a>
+                    <a href="/ideas/{{$idea->id}}" class="card-link">More Details</a>
                 </div>
             </div>
         </div>
 
         @endforeach
-
-
+        @else
+        <div class="text-center">
+            <h4><em class="text-muted">No ideas created yet....</em></h4>
+        </div>
+        @endif
     </div>
+
+
+
+
 </div>
 
 @endsection

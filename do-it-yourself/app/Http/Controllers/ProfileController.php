@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ideas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +25,8 @@ class ProfileController extends Controller
     public function index(User $user)
     {
         //
-        // dd($user);
+        // $ideas = Ideas::whereIn('user_id', [$user->id])->latest()->paginate(6);
+        // dd($ideas);
         return view('profile.index', compact('user'));
     }
 
@@ -94,6 +96,8 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255',],
             'password' => ['required', 'string', 'min:8'],
         ]);
+
+
 
 
         $base_image_url = '/public/profile/images';

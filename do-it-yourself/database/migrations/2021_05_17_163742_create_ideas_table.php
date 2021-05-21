@@ -21,6 +21,8 @@ class CreateIdeasTable extends Migration
             $table->longText('materials');
             $table->longText('instructions');
             $table->timestamps();
+
+            $table->index('user_id');
         });
     }
 
