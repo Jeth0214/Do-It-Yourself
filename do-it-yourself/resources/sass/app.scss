@@ -21,4 +21,28 @@
     color: #FEEE92;
 }
 
+.spinner-container {
+    right: 0;
+    background-color: #c700ff33;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    .spinner-border {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+        font-size: 1rem;
+    }
+    .spinner-text {
+        top: 60%;
+        left: 50%;
+        position: absolute;
+    }
+}
+
+
 

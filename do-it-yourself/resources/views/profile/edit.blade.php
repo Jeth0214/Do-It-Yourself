@@ -1,8 +1,19 @@
 @extends('layouts.app')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 @section('content')
 <div class="container">
+    <div class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-text text-primary">
+            Updating...
+        </div>
+    </div>
     <div class="row">
+
+
         <div class="col-md-8 offset-md-2">
             <div class="card border border-primary">
                 <div class="card-header text-center">
@@ -58,6 +69,7 @@
 
                         </div>
 
+
                         <div class="form-group ">
                             <label for="description" class="col-form-label text-primary">Description</label>
                             <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') ?? $user->profile->description}}" autocomplete="description">
@@ -91,7 +103,7 @@
                             @enderror
                         </div>
                         <div class="form-group ">
-                            <label for="password" class="col-form-label text-primary">Password</label>
+                            <label for="password" class="col-form-label text-primary">Enter or Create New Password</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password')}}" autocomplete="password">
 
                             @error('password')
@@ -103,7 +115,7 @@
                         </div>
                         <div class="d-flex justify-content-between pt-5">
                             <div class="">
-                                <button class="btn btn-primary text-yellow">Save Profile</button>
+                                <button class="btn btn-primary text-yellow" id="save">Save Profile</button>
                             </div>
                             <div class="">
                                 <a class="btn btn-primary text-yellow" href="/profile/{{$user}}">Back to Profile</a>
@@ -118,12 +130,22 @@
 </div>
 
 @endsection
+
 <script>
     // wait for the DOM to be loaded
     $(document).ready(function() {
-        // bind 'myForm' and provide a simple callback function
-        $('.profile-form').ajaxForm(function() {
-            alert("Thank you for your comment!");
-        });
+
+        var spinner = $('.spinner-container');
+
+        spinner.hide();
+        $("#save").click(function() {
+            if ($("input[type='password']").val() != "") {
+                spinner.show();
+            } else {
+                spinner.hide()
+            }
+
+        })
+
     });
 </script>

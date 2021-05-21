@@ -10030,27 +10030,6 @@ h3 {
   max-height: 100%;
 }
 
-.progress {
-  position: relative;
-  width: 100%;
-  border: 1px solid #7F98B2;
-  padding: 1px;
-  border-radius: 3px;
-}
-.progress .bar {
-  background-color: #B4F5B4;
-  width: 0%;
-  height: 25px;
-  border-radius: 3px;
-}
-.progress .percent {
-  position: absolute;
-  display: inline-block;
-  top: 3px;
-  left: 48%;
-  color: #7F98B2;
-}
-
 textarea {
   min-height: 200px !important;
 }
@@ -10061,4 +10040,27 @@ textarea {
 
 .text-yellow {
   color: #FEEE92;
+}
+
+.spinner-container {
+  right: 0;
+  background-color: #c700ff33;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+}
+.spinner-container .spinner-border {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  height: 4rem;
+  width: 4rem;
+  font-size: 1rem;
+}
+.spinner-container .spinner-text {
+  top: 60%;
+  left: 50%;
+  position: absolute;
 }

@@ -90,7 +90,7 @@ class ProfileController extends Controller
             'title' => 'required',
             'description' => 'required',
             'url' => 'url',
-            'profile_img' => 'image|max:10000',
+            'profile_img' => 'required|image|max:10000',
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255',],
             'email' => ['required', 'string', 'email', 'max:255',],
