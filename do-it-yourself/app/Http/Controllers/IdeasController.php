@@ -104,7 +104,7 @@ class IdeasController extends Controller
     {
         //
         //$user = auth()->user();
-        // $this->authorize('update', $user->ideas);
+        $this->authorize('update', $user->idea);
 
         return view('ideas.edit', compact('idea', 'user'));
     }

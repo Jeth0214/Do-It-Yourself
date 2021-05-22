@@ -10,19 +10,21 @@
                 </video>
                 <div class="d-none d-sm-block mt-3">
                     <div class="d-flex justify-content-around align-items-baseline">
-                        <!-- @can('update', $user->idea)
-
-                        @endcan -->
-
+                        @can('update', $idea)
                         <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success">
                             <span class="text-yellow"> Edit</span>
                         </a>
+                        @endcan
 
 
+
+                        @can('delete', $idea)
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                             Delete
                         </button>
+                        @endcan
+
 
 
 
