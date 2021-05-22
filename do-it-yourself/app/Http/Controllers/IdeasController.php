@@ -167,6 +167,7 @@ class IdeasController extends Controller
         //
         $this->authorize('delete', $user->ideas);
         $idea->delete();
+        Storage::delete('public/storage/ideas/videos/' . $idea->video);;
         return redirect("/profile/" . auth()->user()->id)->with('success', 'Idea deleted successfully');
     }
 

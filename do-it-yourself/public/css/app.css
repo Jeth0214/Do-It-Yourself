@@ -10038,6 +10038,10 @@ textarea {
   height: 400px;
 }
 
+.main {
+  margin-top: 7rem !important;
+}
+
 .text-yellow {
   color: #FEEE92;
 }

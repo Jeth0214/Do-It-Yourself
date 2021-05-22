@@ -25,9 +25,9 @@ class ProfileController extends Controller
     public function index(User $user)
     {
         //
-        // $ideas = Ideas::whereIn('user_id', [$user->id])->latest()->paginate(6);
+        $ideas = Ideas::whereIn('user_id', [$user->id])->latest()->simplePaginate(6);
         // dd($ideas);
-        return view('profile.index', compact('user'));
+        return view('profile.index', compact('user', 'ideas'));
     }
 
     /**

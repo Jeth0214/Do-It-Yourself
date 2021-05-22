@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container ">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <!-- <img src="/img/no-profile-image.png" alt="No Image Logo" class="profile-image rounded-circle img-thumbnail"> -->
@@ -58,8 +58,8 @@
     @endif
 
     <div class="row">
-        @if ($user->ideas)
-        @foreach ($user->ideas as $idea)
+        @if ($user->ideas->count() > 0)
+        @foreach ($ideas as $idea)
         <div class="col-md-4 my-3">
             <div class="card ideas">
                 <video class="w-100" controls>
@@ -98,7 +98,11 @@
 
 
 
-
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+            {{$ideas->links()}}
+        </div>
+    </div>
 </div>
 
 @endsection
