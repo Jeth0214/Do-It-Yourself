@@ -36,7 +36,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h3 class="card-title text-primary">{{$idea->caption}}</h3>
-                        <a href=" /profile/{{$user->id}}" class="btn btn-primary btn-sm">
+                        <a href=" /profile/{{$idea->user->id}}" class="btn btn-primary btn-sm">
                             <span class="text-yellow">Back</span>
                         </a>
                     </div>
