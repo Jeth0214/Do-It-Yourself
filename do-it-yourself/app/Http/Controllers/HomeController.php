@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$ideas = Ideas;
+        $ideas = Ideas::orderBy('created_at', 'desc')->get();
         //dd($ideas);
         return view('home', compact('ideas'));
     }
