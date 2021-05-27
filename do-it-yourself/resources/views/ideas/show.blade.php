@@ -11,23 +11,17 @@
                 <div class="d-none d-sm-block mt-3">
                     <div class="d-flex justify-content-around align-items-baseline">
                         @can('update', $idea)
-                        <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success">
+                        <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success btn-sm">
                             <span class="text-yellow"> Edit</span>
                         </a>
                         @endcan
 
-
-
                         @can('delete', $idea)
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
                             Delete
                         </button>
                         @endcan
-
-
-
-
                     </div>
                 </div>
 
@@ -36,12 +30,26 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h3 class="card-title text-primary">{{$idea->caption}}</h3>
-                        <a href=" /profile/{{$idea->user->id}}" class="btn btn-primary btn-sm">
-                            <span class="text-yellow">Back</span>
-                        </a>
+
+                        <div>
+                            <a href=" /profile/{{$idea->user->id}}" class="btn btn-primary btn-sm">
+                                <span class="text-yellow">View Creator's Profile</span>
+                            </a>
+                            <a href=" /home" class="btn btn-primary btn-sm">
+                                <span class="text-yellow">Back Home</span>
+                            </a>
+                        </div>
+
                     </div>
 
-                    <p class="card-text">
+                    <p class="card-text mb-0 pb-0">
+                        Created By:
+                        <a href="/profile/{{$idea->user->id}}">
+                            <span class="text-primary">{{$idea->user->username}}</span>
+                        </a>
+                    </p>
+
+                    <p class="card-text mt-0">
                         Posted:
                         <small class="text-muted">
                             @php
@@ -74,7 +82,7 @@
                     <div class="d-md-none">
                         <div class="d-flex justify-content-between">
                             @can('update', $user->idea)
-                            <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success">
+                            <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success btn-sm">
                                 <span class="text-yellow"> Edit</span>
                             </a>
                             @endcan
@@ -82,7 +90,7 @@
 
                             <!-- Button trigger modal -->
                             @can('delete', $user->idea)
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
                                 Delete
                             </button>
                             @endcan

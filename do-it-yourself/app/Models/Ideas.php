@@ -15,4 +15,9 @@ class Ideas extends Model
     {
         return   $this->belongsTo(User::class);
     }
+
+    public function saves()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

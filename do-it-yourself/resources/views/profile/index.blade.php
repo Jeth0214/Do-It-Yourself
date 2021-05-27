@@ -20,7 +20,7 @@
                     </small>
                     <div class="row mt-4">
                         <div class="col-6 text-right">
-                            <p> 3 ideas saved</p>
+                            <p> {{$user->savingIdeas->count()}} ideas saved</p>
                         </div>
                         <div class="col-6 text-left">
                             <p> {{$user->ideas->count()}} ideas created</p>
