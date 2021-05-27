@@ -21,10 +21,11 @@ class IdeasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
         //
-
+        $saves = (auth()->user()) ? auth()->user()->savingIdeas->contains($user->id) : false;
+        return view('home', compact('saves'));
     }
 
     /**

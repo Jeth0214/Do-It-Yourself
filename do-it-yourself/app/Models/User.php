@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ideas::class)->orderBy('created_at', 'DESC');
     }
+
+    public function savingIdeas()
+    {
+        return $this->belongsToMany(Ideas::class);
+    }
 }

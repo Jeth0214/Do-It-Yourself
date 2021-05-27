@@ -36,4 +36,7 @@ Route::get('/ideas/{idea}', [App\Http\Controllers\IdeasController::class, 'show'
 Route::get('/ideas/{idea}/edit', [App\Http\Controllers\IdeasController::class, 'edit']);
 Route::patch('/ideas/{idea}', [App\Http\Controllers\IdeasController::class, 'update']);
 Route::delete('/ideas/{idea}', [App\Http\Controllers\IdeasController::class, 'destroy']);
-// Route::post('get-video/{video}', [App\Http\Controllers\IdeasController::class, 'getVideo'])->name('getVideo');
+
+
+//Saves route
+Route::post('saves/{idea}', [App\Http\Controllers\SavesController::class, 'store']);

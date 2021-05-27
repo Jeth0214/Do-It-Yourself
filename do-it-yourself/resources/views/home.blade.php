@@ -12,7 +12,11 @@
                 </video>
 
                 <div class="card-body">
-                    <h5 class="card-title text-primary mb-1">{{ $idea->caption}}</h5>
+                    <div class="d-flex align-items-baseline justify-content-between">
+                        <h5 class="card-title text-primary mb-1">{{ $idea->caption}}</h5>
+                        <save-button idea-id="{{$idea->id}}" saves="{{$idea->saves}}"></save-button>
+                    </div>
+
                     <small class="text-muted">
                         <span>Posted: </span>
                         @php
@@ -34,7 +38,7 @@
                         ...
                     </p>
 
-                    <a href="/ideas/{{$idea->id}}" class="card-link">More Details</a>
+                    <a href="/ideas/{{$idea->id}}" class="btn btn-primary text-yellow btn-sm">More Details</a>
                 </div>
             </div>
         </div>
