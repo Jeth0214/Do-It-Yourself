@@ -37,7 +37,7 @@
                     {{ config('app.name', 'Laravel') }}
                 </a> -->
 
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/home') }}">
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('home/ideas') }}">
                     <img src="/img/diy-logo.png" width="50" height="50" alt="Do it Yourself logo">
                     <span class="pt-2 text-yellow"> Do It Yourself</span>
                 </a>
