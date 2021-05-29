@@ -35,4 +35,14 @@ class HomeController extends Controller
         //dd($saves);
         return view('home', compact('ideas'));
     }
+
+    public function ideas()
+    {
+        $ideas = auth()->user()->savingIdeas()->pluck('ideas.id');
+        //dd($ideas);
+        $saves = Ideas::whereIn('id', $ideas)->with('user')->latest()->paginate(5);
+
+        //dd($saves);
+        return view('home/saved-ideas', compact('saves'));
+    }
 }
