@@ -10068,3 +10068,7 @@ textarea {
   left: 50%;
   position: absolute;
 }
+
+.test:hover {
+  color: #EE1AAB;
+}

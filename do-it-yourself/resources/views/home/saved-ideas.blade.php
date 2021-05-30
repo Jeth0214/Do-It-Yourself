@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-flex justify-content-between">
+                <div class="text-center w-100 p-2 border-bottom">
+                    <a href="/home/ideas" class="text-decoration-none h5 text-muted test">All Ideas</a>
+                </div>
+                <div class="text-center w-100 border-bottom border-primary p-2">
+                    <a href="/home/saved-ideas" class="text-decoration-none h5">Saved Ideas</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row ">
 
         <div class="col-md-6 offset-md-3 my-3">
@@ -38,14 +50,14 @@
                         ...
                     </p>
 
-                    <a href="/saves/{{$save->id}}" class="card-link">More Details</a>
+                    <a href="/ideas/{{$save->id}}" class="card-link">More Details</a>
                 </div>
             </div>
             @endforeach
             @else
             .
             <div class="text-center">
-                <h4><em class="text-muted">No saves created yet....</em></h4>
+                <h4><em class="text-muted">You don't have any saved idea....</em></h4>
             </div>
             @endif
         </div>
