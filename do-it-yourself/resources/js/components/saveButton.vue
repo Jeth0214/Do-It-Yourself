@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn btn-primary btn-sm"
+    class="btn btn-primary btn-sm text-yellow"
     @click="saveIdea"
     v-text="buttonText"
   ></button>

@@ -42,7 +42,7 @@ class IdeasPolicy
     public function create(User $user, Ideas $ideas)
     {
         //
-        return $user->id === $ideas->user_id;
+        return $user->id == $ideas->user_id;
     }
 
     /**
@@ -55,7 +55,7 @@ class IdeasPolicy
     public function update(User $user, Ideas $ideas)
     {
         //
-        return $user->id ===  $ideas->user_id;
+        return $user->id ==  $ideas->user_id;
     }
 
     /**
@@ -68,7 +68,7 @@ class IdeasPolicy
     public function delete(User $user, Ideas $ideas)
     {
         //
-        return $user->id === $ideas->user_id;
+        return $user->id == $ideas->user_id;
     }
 
     /**

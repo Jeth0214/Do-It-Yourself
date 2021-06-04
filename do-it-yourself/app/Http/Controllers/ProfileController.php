@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ideas;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -83,14 +84,15 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        // dd($request->all());
+        $user = User::findOrFail($id);
+        //dd($user);
         $request->validate([
             'title' => 'required',
             'description' => 'required',
             'url' => 'url',
-            'profile_img' => 'required|image|max:10000',
+            'profile_img' => 'image|max:10000',
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255',],
             'email' => ['required', 'string', 'email', 'max:255',],
@@ -99,7 +101,7 @@ class ProfileController extends Controller
 
 
 
-
+        $profileImage = "";
         $base_image_url = '/public/profile/images';
         $now = new \DateTime();
         if ($request->hasFile('profile_img')) {
@@ -107,11 +109,14 @@ class ProfileController extends Controller
                 $extension = $request->profile_img->extension(); // get image file extension
                 $request->profile_img->storeAs($base_image_url, $user->username . "-" . $now->getTimeStamp() . "." . $extension);
                 $url = Storage::url('public/profile/images/' . $user->username . "-" . $now->getTimeStamp() . "." . $extension);
-                $user->profile_img = $url;
-                //dd($url);
-                $imageArray = ['profile_img' => $url];
+
+                $profileImage = $url;
             }
+        } else {
+            $profileImage = $user->profile_img;
         }
+
+
 
         auth()->user()->profile()->update([
             'title' => $request->title,
@@ -119,16 +124,14 @@ class ProfileController extends Controller
             'url' => $request->url,
         ]);
 
-        auth()->user()->update(array_merge(
-            [
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'profile_img' => $request->profile_img,
-                'password' => Hash::make($request->password),
-            ],
-            $imageArray ?? []
-        ));
+        auth()->user()->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'profile_img' => $profileImage,
+            'password' => Hash::make($request->password),
+
+        ]);
 
         return redirect("/profile/$user->id");
     }

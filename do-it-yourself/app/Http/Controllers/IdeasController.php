@@ -92,6 +92,7 @@ class IdeasController extends Controller
     {
         //dd($idea);
         $user = auth()->user();
+        $idea['saves'] = (auth()->user()) ? auth()->user()->savingIdeas->contains($idea->id) : false;
         return view('ideas.show', compact('idea', 'user'));
     }
 
@@ -105,7 +106,7 @@ class IdeasController extends Controller
     {
         //
         //$user = auth()->user();
-        $this->authorize('update', $user->idea);
+        //$this->authorize('update', $user->idea);
 
         return view('ideas.edit', compact('idea', 'user'));
     }
@@ -166,18 +167,9 @@ class IdeasController extends Controller
     {
 
         //
-        $this->authorize('delete', $user->ideas);
+        // $this->authorize('delete', $user->ideas);
         $idea->delete();
         Storage::delete('public/storage/ideas/videos/' . $idea->video);;
         return redirect("/profile/" . auth()->user()->id)->with('success', 'Idea deleted successfully');
     }
-
-    //     public function getVideo(Video $video)
-    // {-
-    //     $name = $video->name;
-    //     $fileContents = Storage::disk('local')->get("uploads/videos/{$name}");
-    //     $response =  Response::make($fileContents, 200);
-    //     $response->header('Content-Type', "video/mp4");
-    //     return $response;
-    //}
 }

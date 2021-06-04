@@ -2,105 +2,87 @@
 
 @section('content')
 <div class="container">
-    <div class="card mb-3 border border-primary">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <video class="w-100" controls>
-                    <source src="{{$idea->video}}" type="video/mp4">
-                </video>
-                <div class="d-none d-sm-block mt-3">
-                    <div class="d-flex justify-content-around align-items-baseline">
-                        @can('update', $idea)
-                        <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success btn-sm">
-                            <span class="text-yellow"> Edit</span>
-                        </a>
-                        @endcan
-
-                        @can('delete', $idea)
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
-                            Delete
-                        </button>
-                        @endcan
-                    </div>
-                </div>
-
+    <div class="row">
+        <div class="col-8 offset-md-2">
+            <div class="mb-2">
+                <a href=" /home/ideas" class="btn btn-primary">
+                    <span class="text-yellow">Back Home</span>
+                </a>
             </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-baseline">
-                        <h3 class="card-title text-primary">{{$idea->caption}}</h3>
+            <div class="card mb-3 border border-primary">
+                <div class="row no-gutters">
+                    <video class="w-100" controls>
+                        <source src="{{$idea->video}}" type="video/mp4">
+                    </video>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h3 class="card-title text-primary">{{$idea->caption}}</h3>
+                            <div>
+                                <save-button idea-id="{{$idea->id}}" saves="{{$idea->saves}}"></save-button>
+
+                            </div>
+                        </div>
 
                         <div>
-                            <a href=" /profile/{{$idea->user->id}}" class="btn btn-primary btn-sm">
-                                <span class="text-yellow">View Creator's Profile</span>
-                            </a>
-                            <a href=" /home" class="btn btn-primary btn-sm">
-                                <span class="text-yellow">Back Home</span>
+                            <a href="/profile/{{$idea->user->id}}">
+                                <img src=" {{ $idea->user->profileImage()}}" width="30" height="30" alt="profile image" class="rounded-circle mr-1">
+                                <span class="text-primary">{{ $idea->user->username }}</span>
                             </a>
                         </div>
 
-                    </div>
+                        <p class="card-text mt-0">
+                            Posted:
+                            <small class="text-muted">
+                                @php
+                                $date=date_create("$idea->created_at");
+                                echo date_format($date,"m/d/Y H:i:a");
+                                @endphp
+                            </small>
+                        </p>
 
-                    <p class="card-text mb-0 pb-0">
-                        Created By:
-                        <a href="/profile/{{$idea->user->id}}">
-                            <span class="text-primary">{{$idea->user->username}}</span>
-                        </a>
-                    </p>
+                        <h5 class="text-primary">Instructions :</h5>
+                        <p>{{$idea->instructions}}</p>
 
-                    <p class="card-text mt-0">
-                        Posted:
-                        <small class="text-muted">
-                            @php
-                            $date=date_create("$idea->created_at");
-                            echo date_format($date,"m/d/Y H:i:a");
-                            @endphp
-                        </small>
-                    </p>
+                        <div class="p-2">
+                            <h5 class="text-primary">Materials :</h5>
+                            <ul class="list-group">
+                                @php
+                                $materials = explode("," , $idea->materials);
+                                @endphp
 
-                    <h5 class="text-primary">Instructions :</h5>
-                    <p>{{$idea->instructions}}</p>
+                                @foreach ($materials as $material)
+                                <li class="list-group-item d-flex p-1">
+                                    <i class="far fa-hand-point-right mt-1 mr-2 text-primary"></i>
+                                    <span>{{$material}}</span>
+                                </li>
+                                @endforeach
 
-                    <div class="p-2">
-                        <h5 class="text-primary">Materials :</h5>
-                        <ul class="list-group">
-                            @php
-                            $materials = explode("," , $idea->materials);
-                            @endphp
-
-                            @foreach ($materials as $material)
-                            <li class="list-group-item d-flex p-1">
-                                <i class="material-icons mr-2">play_arrow</i>
-                                <span>{{$material}}</span>
-                            </li>
-                            @endforeach
-
-                        </ul>
-                    </div>
-
-                    <div class="d-md-none">
-                        <div class="d-flex justify-content-between">
-                            @can('update', $user->idea)
-                            <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success btn-sm">
-                                <span class="text-yellow"> Edit</span>
-                            </a>
-                            @endcan
-
-
-                            <!-- Button trigger modal -->
-                            @can('delete', $user->idea)
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
-                                Delete
-                            </button>
-                            @endcan
+                            </ul>
                         </div>
-                    </div>
 
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-around align-items-baseline">
+                                @can('update', $idea)
+                                <a href="/ideas/{{$idea->id}}/edit" class="btn btn-success">
+                                    <span class="text-yellow"> Edit</span>
+                                </a>
+                                @endcan
+
+                                @can('delete', $idea)
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger text-yellow" data-toggle="modal" data-target="#deleteModal">
+                                    Delete
+                                </button>
+                                @endcan
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <!-- Modal -->
