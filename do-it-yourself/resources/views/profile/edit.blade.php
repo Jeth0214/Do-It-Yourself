@@ -3,14 +3,14 @@
 
 @section('content')
 <div class="container">
-    <div class="spinner-container">
+    <!-- <div class="spinner-container">
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
         <div class="spinner-text text-primary">
             Updating...
         </div>
-    </div>
+    </div> -->
     <div class="row">
 
 
@@ -96,14 +96,14 @@
 
                         <div class="form-group">
                             <label for="profile_img" class="text-primary">Select Profile Image</label>
-                            <input id="profile_img" type="file" class="form-control-file @error('profile_img') is-invalid @enderror" name="profile_img" value="{{ old('profile_img') ?? $user->profileImage() }}">
+                            <input id="profile_img" type="file" class="form-control-file @error('profile_img') is-invalid @enderror" name="profile_img" value="{{ old('profile_img')}}">
 
                             @error('profile_img')
                             <strong class="invalid-feedback">{{ $message }}</strong>
                             @enderror
                         </div>
                         <div class="form-group ">
-                            <label for="password" class="col-form-label text-primary">Enter or Create New Password</label>
+                            <label for="password" class="col-form-label text-primary">Enter your password or create new</label>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password')}}" autocomplete="password">
 
                             @error('password')
@@ -118,7 +118,7 @@
                                 <button class="btn btn-primary text-yellow" id="save">Save Profile</button>
                             </div>
                             <div class="">
-                                <a class="btn btn-primary text-yellow" href="/profile/{{$user}}">Back to Profile</a>
+                                <a class="btn btn-primary text-yellow" href="/profile/{{$user->id}}">Back to Profile</a>
                             </div>
                         </div>
 
@@ -132,20 +132,16 @@
 @endsection
 
 <script>
-    // wait for the DOM to be loaded
-    $(document).ready(function() {
+    // wait  the DOM to be loaded
+    // $(document).ready(function() {
 
-        var spinner = $('.spinner-container');
+    //     var spinner = $('.spinner-container');
 
-        spinner.hide();
-        $("#save").click(function() {
-            if ($("input[type='password']").val() != "") {
-                spinner.show();
-            } else {
-                spinner.hide()
-            }
+    //     spinner.hide();
+    //     $("#save").click(function() {
+    //         spinner.show();
 
-        })
+    //     })
 
-    });
+    // });
 </script>

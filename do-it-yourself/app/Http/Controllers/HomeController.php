@@ -25,22 +25,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ideas = Ideas::orderBy('created_at', 'desc')->get();
+        $ideas = Ideas::orderBy('created_at', 'desc')->simplePaginate(5);
 
         foreach ($ideas as $idea) {
 
             $idea['saves'] = (auth()->user()) ? auth()->user()->savingIdeas->contains($idea->id) : false;
         }
 
-        //dd($saves);
-        return view('home', compact('ideas'));
+        //dd($ideas);
+        return view('home/ideas', compact('ideas'));
     }
 
     public function ideas()
     {
         $ideas = auth()->user()->savingIdeas()->pluck('ideas.id');
         //dd($ideas);
-        $saves = Ideas::whereIn('id', $ideas)->with('user')->latest()->paginate(5);
+        $saves = Ideas::whereIn('id', $ideas)->with('user')->latest()->simplePaginate(5);
 
         //dd($saves);
         return view('home/saved-ideas', compact('saves'));

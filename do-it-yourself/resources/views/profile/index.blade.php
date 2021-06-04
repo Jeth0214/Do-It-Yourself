@@ -3,9 +3,13 @@
 @section('content')
 
 <div class="container ">
+    <div class="text-right">
+        <a href=" /home/ideas" class="btn btn-primary">
+            <span class="text-yellow">Back Home</span>
+        </a>
+    </div>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <!-- <img src="/img/no-profile-image.png" alt="No Image Logo" class="profile-image rounded-circle img-thumbnail"> -->
             <div class="profile-image-container">
                 <img src="{{ $user->profileImage()}}" alt="No Image Logo" class="profile-image img-thumbnail">
             </div>
@@ -13,11 +17,14 @@
             <div class="card mt-3 border border-primary">
                 <div class="card-content pt-5 text-center">
                     <h3>{{$user->name}}</h3>
-                    <p class="mb-0">{{$user->profile->username}}</p>
+                    <p class="mb-0">{{$user->username}}</p>
                     <p class="mb-0">{{$user->email}}</p>
+                    @if ($user->profile)
                     <small>
                         <a href="{{$user->profile->url}}">{{$user->profile->url}}</a>
                     </small>
+                    @endif
+
                     <div class="row mt-4">
                         <div class="col-6 text-right">
                             <p> {{$user->savingIdeas->count()}} ideas saved</p>
@@ -90,9 +97,11 @@
 
         @endforeach
         @else
-        <div class="text-center">
+
+        <div class="mx-auto mt-5">
             <h4><em class="text-muted">No ideas created yet....</em></h4>
         </div>
+
         @endif
     </div>
 
