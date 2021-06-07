@@ -24,8 +24,8 @@
 <body>
     <div class="welcome-page">
         <div class="d-flex align-items-center justify-content-center h-100">
-            <div class="jumbotron">
-                <h1 class="display-4">Welcome to Do-It-Yourself</h1>
+            <div class="jumbotron mx-3">
+                <h1 class="display-md-4 display-5">Welcome to Do-It-Yourself</h1>
                 <p class="lead text-center">A community that you can get and share DIY ideas.</p>
                 <hr class="my-4">
                 <div class="d-flex justify-content-between">

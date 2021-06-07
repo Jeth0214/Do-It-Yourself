@@ -2,14 +2,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 @section('content')
 <div class="container">
-    <!-- <div class="spinner-container">
+    <div class="spinner-container">
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <div class="spinner-text text-primary">
+        <div class="spinner-text text-primary mt-2">
             Updating...
         </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card border border-primary">
@@ -48,7 +48,7 @@
                         <!-- Instruction  -->
                         <div class="form-group ">
                             <label for="instructions" class="col-form-label text-primary">Instructions</label>
-                            <textarea id="instructions" cols="30" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') }}" autocomplete="instructions">{{$idea->instructions}}
+                            <textarea id="instructions" cols="30" class="form-control @error('instructions') is-invalid @enderror" name="instructions" autocomplete="instructions">{{$idea->instructions}}
                             </textarea>
 
                             @error('materials')
@@ -88,14 +88,14 @@
 @endsection
 <script>
     // wait for the DOM to be loaded
-    // $(document).ready(function() {
+    $(document).ready(function() {
 
-    //     var spinner = $('.spinner-container');
-    //     spinner.hide();
+        var spinner = $('.spinner-container');
+        spinner.hide();
 
-    //     $("#update").click(function() {
-    //         spinner.show();
-    //     })
+        $("#update").click(function() {
+            spinner.show();
+        })
 
-    // });
+    });
 </script>

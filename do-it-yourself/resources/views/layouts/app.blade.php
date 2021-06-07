@@ -60,20 +60,21 @@
                     </li>
                     @endif
                     @else
-                    <li class="nav-item d-flex align-items-center mr-sm-1 mr-md-0">
-                        <a href="/profile/{{Auth::user()->id}}">
+                    <!-- <li class="nav-item d-flex align-items-center mr-sm-1 mr-md-0">
+                        <a href="/profile/{{Auth::user()->id}}" class="d-none d-md-inline-block">
                             <div class="nav-profile-image">
                                 <img src="{{ Auth::user()->profileImage()}}" width="30" height="30" alt="Do it Yourself logo" class="rounded-circle">
                             </div>
 
                         </a>
-                    </li>
+
+                    </li> -->
 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-yellow" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <span class="text-yellow">{{ Auth::user()->username }}</span>
+                            <img src="{{ Auth::user()->profileImage()}}" width="30" height="30" alt="Do it Yourself logo" class="rounded-circle ">
+                            <span class="text-yellow d-none d-md-inline-block">{{ Auth::user()->username }}</span>
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a href="/profile/{{Auth::user()->id}}" class="dropdown-item text-primary">Your Profile</a>
                             <a class="dropdown-item text-primary" href="{{ route('logout') }}" onclick="event.preventDefault();

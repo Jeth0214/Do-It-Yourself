@@ -10072,3 +10072,8 @@ textarea {
 .test:hover {
   color: #EE1AAB;
 }
+
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  float: none;
+}

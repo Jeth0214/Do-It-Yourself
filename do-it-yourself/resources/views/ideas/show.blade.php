@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-8 offset-md-2">
+        <div class="col-md-8 offset-md-2">
             <div class="mb-2">
                 <a href=" /home/ideas" class="btn btn-primary">
                     <span class="text-yellow">Back Home</span>
@@ -16,7 +16,11 @@
                     </video>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-baseline">
-                            <h3 class="card-title text-primary">{{$idea->caption}}</h3>
+                            <a href="/ideas/{{$idea->id}}">
+                                <h3 class="card-title text-primary mb-1">
+                                    {{ $idea->caption}}
+                                </h3>
+                            </a>3>
                             <div>
                                 <save-button idea-id="{{$idea->id}}" saves="{{$idea->saves}}"></save-button>
 

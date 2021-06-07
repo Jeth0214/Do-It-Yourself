@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="container ">
-    <div class="text-right">
-        <a href=" /home/ideas" class="btn btn-primary">
+    <div class="text-md-right">
+        <a href="/home/ideas" class="btn btn-primary btn-sm">
             <span class="text-yellow">Back Home</span>
         </a>
     </div>
@@ -74,7 +74,11 @@
                 </video>
 
                 <div class="card-body">
-                    <h5 class="card-title text-primary mb-1">{{ $idea->caption}}</h5>
+                    <a href="/ideas/{{$idea->id}}">
+                        <h5 class="card-title text-primary mb-1">
+                            {{ $idea->caption}}
+                        </h5>
+                    </a>
                     <small class="text-muted">
                         <span>Posted: </span>
                         @php
@@ -90,7 +94,7 @@
                         ...
                     </p>
 
-                    <a href="/ideas/{{$idea->id}}" class="card-link">More Details</a>
+                    <a href="/ideas/{{$idea->id}}" class="btn btn-sm btn-primary text-yellow">More Details</a>
                 </div>
             </div>
         </div>
@@ -115,3 +119,8 @@
 </div>
 
 @endsection
+
+
+<script>
+    $('.toast').toast(option)
+</script>
