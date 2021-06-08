@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-6 offset-3 ">
+        <div class="col-md-6 offset-md-3 ">
             <div class="d-flex justify-content-between">
                 <div class="text-center w-100 p-2 border-bottom">
                     <a href="/home/ideas" class="text-decoration-none h5 text-muted test">All Ideas</a>
@@ -16,7 +16,7 @@
     </div>
     <div class="row ">
 
-        <div class="col-6 offset-md-3 ">
+        <div class="col-md-6 offset-md-3 ">
             @if ($saves->count() > 0)
             @foreach ($saves as $save)
             <div class="card my-3">
@@ -26,7 +26,11 @@
 
                 <div class="card-body">
                     <div class="d-flex align-items-baseline justify-content-between">
-                        <h5 class="card-title text-primary mb-1">{{ $save->caption}}</h5>
+                        <a href="/ideas/{{$save->id}}">
+                            <h5 class="card-title text-primary mb-1">
+                                {{ $save->caption}}
+                            </h5>
+                        </a>
                         <save-button idea-id="{{$save->id}}" saves="{{$save->saves}}"></save-button>
                     </div>
                     <div>

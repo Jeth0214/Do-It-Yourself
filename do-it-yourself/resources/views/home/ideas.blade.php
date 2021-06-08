@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-6 offset-3">
+        <div class="col-md-6 offset-md-3">
             <div class="d-flex justify-content-between ">
                 <div class="text-center w-100 border-bottom border-primary p-2">
                     <a href="/home/ideas" class="text-decoration-none h5 ">All Ideas</a>
@@ -18,7 +18,7 @@
     <div class="row ">
         @if ($ideas->count() > 0)
         @foreach ($ideas as $idea)
-        <div class="col-6 offset-md-3 my-3">
+        <div class="col-md-6 offset-md-3 my-3">
             <div class="card ">
                 <video class="w-100" controls>
                     <source src="{{$idea->video}}" type="video/mp4">
@@ -26,7 +26,12 @@
 
                 <div class="card-body">
                     <div class="d-flex align-items-baseline justify-content-between">
-                        <h5 class="card-title text-primary mb-1 text-yellow">{{ $idea->caption}}</h5>
+                        <a href="/ideas/{{$idea->id}}">
+                            <h5 class="card-title text-primary mb-1">
+                                {{ $idea->caption}}
+                            </h5>
+                        </a>
+
                         <save-button idea-id="{{$idea->id}}" saves="{{$idea->saves}}"></save-button>
                     </div>
                     <div>

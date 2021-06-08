@@ -6,7 +6,7 @@
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <div class="spinner-text text-primary">
+        <div class="spinner-text text-primary mt-3">
             Creating...
         </div>
     </div>
@@ -35,9 +35,7 @@
                         <!-- Materials  -->
                         <div class="form-group ">
                             <label for="materials" class="col-form-label text-primary">Materials ( comma "," seperated )</label>
-                            <textarea id="materials" class="form-control @error('materials') is-invalid @enderror" name="materials" value="{{ old('materials') }}" autocomplete="materials">
-
-                            </textarea>
+                            <textarea id="materials" class="form-control @error('materials') is-invalid @enderror" name="materials" autocomplete="materials">{{ old('materials') }}</textarea>
 
                             @error('materials')
                             <span class="invalid-feedback" role="alert">
@@ -49,9 +47,7 @@
                         <!-- Instruction  -->
                         <div class="form-group ">
                             <label for="instructions" class="col-form-label text-primary">Instructions</label>
-                            <textarea id="instructions" cols="30" class="form-control @error('instructions') is-invalid @enderror" name="instructions" value="{{ old('instructions') }}" autocomplete="instructions">
-
-                            </textarea>
+                            <textarea id="instructions" class="form-control @error('instructions') is-invalid @enderror" name="instructions">{{trim(old('instructions'))}}</textarea>
 
                             @error('materials')
                             <span class="invalid-feedback" role="alert">
