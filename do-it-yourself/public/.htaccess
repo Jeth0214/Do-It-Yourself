@@ -18,12 +18,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    php_flag display_errors On
-    php_value max_execution_time 999
-    php_value max_input_time 999
-    php_value max_input_vars 1000
-    php_value memory_limit 9999M
-    php_value post_max_size 9999M
-    php_value upload_max_filesize 9999M
 </IfModule>

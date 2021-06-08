@@ -20,7 +20,7 @@
                                 <h3 class="card-title text-primary mb-1">
                                     {{ $idea->caption}}
                                 </h3>
-                            </a>3>
+                            </a>
                             <div>
                                 <save-button idea-id="{{$idea->id}}" saves="{{$idea->saves}}"></save-button>
 
