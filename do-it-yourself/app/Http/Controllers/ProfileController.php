@@ -27,8 +27,23 @@ class ProfileController extends Controller
     {
         //
         $ideas = Ideas::whereIn('user_id', [$user->id])->latest()->simplePaginate(6);
+        $saves = auth()->user()->savingIdeas()->pluck('ideas.id');
+        //dd($saves);
+        $saveIdeas = Ideas::whereIn('id', $saves)->with('user')->latest()->simplePaginate(6);
         // dd($ideas);
-        return view('profile.index', compact('user', 'ideas'));
+        //dd($saveIdeas);
+        return view('profile.index', compact('user', 'ideas', 'saveIdeas'));
+    }
+
+    public function saved(User $user)
+    {
+
+        $saves = auth()->user()->savingIdeas()->pluck('ideas.id');
+        //dd($saves);
+        $saveIdeas = Ideas::whereIn('id', $saves)->with('user')->latest()->simplePaginate(6);
+        // dd($ideas);
+        //dd($saveIdeas);
+        return view('profile.saved', compact('user', 'saveIdeas'));
     }
 
     /**
@@ -95,7 +110,7 @@ class ProfileController extends Controller
             'profile_img' => 'image|max:10000',
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255',],
-            'email' => ['required', 'string', 'email', 'max:255',],
+            'email' => ['required', 'string', 'email::rfc,dns', 'max:255',],
             'password' => ['required', 'string', 'min:8'],
         ]);
 

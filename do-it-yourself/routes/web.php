@@ -28,6 +28,7 @@ Route::get('/home/saved-ideas', [App\Http\Controllers\HomeController::class, 'id
 Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'index']);
 Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfileController::class, 'edit']);
 Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'update']);
+Route::get('/profile/{user}/saved', [App\Http\Controllers\ProfileController::class, 'saved']);
 
 //Ideas route
 //Route::resource('ideas', [IdeasController::class]);

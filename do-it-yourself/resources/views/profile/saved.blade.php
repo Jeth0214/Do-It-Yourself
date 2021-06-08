@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 
 <div class="container ">
@@ -8,6 +7,8 @@
             <span class="text-yellow">Back Home</span>
         </a>
     </div>
+
+    <!-- Profile -->
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="profile-image-container">
@@ -55,6 +56,7 @@
         </div>
     </div>
 
+    <!-- message -->
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
         <strong>Success</strong> {{$message}}
@@ -63,76 +65,85 @@
         </button>
     </div>
     @endif
+
+    <!-- Buttons -->
     <!-- links  -->
     <div class="row mt-3">
         <div class="col-md-6 offset-md-3">
             <div class="d-flex justify-content-between ">
-                <div class="text-center w-100 border-bottom border-primary p-2">
-                    <a href="/profile/{{$user->id}}" class="text-decoration-none h5 ">Created Ideas</a>
+                <div class="text-center w-100 border-bottom  p-2">
+                    <a href="/profile/{{$user->id}}" class="text-decoration-none h5 text-muted">Created Ideas</a>
                 </div>
-                <div class="text-center w-100 p-2 border-bottom">
-                    <a href="/profile/{{$user->id}}/saved" class="text-decoration-none h5 text-muted">Saved Ideas</a>
+                <div class="text-center w-100 p-2 border-bottom border-primary">
+                    <a href="/profile/{{$user->id}}/saved" class="text-decoration-none h5 ">Saved Ideas</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        @if ($user->ideas->count() > 0)
-        @foreach ($ideas as $idea)
-        <div class="col-md-4 my-3">
-            <div class="card ideas">
-                <video class="w-100" controls>
-                    <source src="{{$idea->video}}" type="video/mp4">
-                </video>
 
-                <div class="card-body">
-                    <a href="/ideas/{{$idea->id}}">
-                        <h5 class="card-title text-primary mb-1">
-                            {{ $idea->caption}}
-                        </h5>
-                    </a>
-                    <small class="text-muted">
-                        <span>Posted: </span>
-                        @php
-                        $date=date_create("$idea->created_at");
-                        echo date_format($date,"m/d/Y H:i:a");
-                        @endphp
-                    </small>
+    <!-- saved Ideas -->
+    <div class="saved-ideas">
+        @if ($saveIdeas->count() > 0)
+        <div class="row">
 
-                    <p class="mt-3">
-                        @php
-                        echo substr($idea->instructions,0,40)
-                        @endphp
-                        ...
-                    </p>
+            @foreach ($saveIdeas as $save)
+            <div class="col-md-4 my-3">
+                <div class="card ideas">
+                    <video class="w-100" controls>
+                        <source src="{{$save->video}}" type="video/mp4">
+                    </video>
 
-                    <a href="/ideas/{{$idea->id}}" class="btn btn-sm btn-primary text-yellow">More Details</a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-baseline justify-content-between">
+                            <a href="/ideas/{{$save->id}}">
+                                <h5 class="card-title text-primary mb-1">
+                                    {{ $save->caption}}
+                                </h5>
+                            </a>
+
+                            <save-button idea-id="{{$save->id}}" saves="{{$save->saves}}"></save-button>
+                        </div>
+                        <small class="text-muted">
+                            <span>Posted: </span>
+                            @php
+                            $date=date_create("$save->created_at");
+                            echo date_format($date,"m/d/Y H:i:a");
+                            @endphp
+                        </small>
+
+                        <p class="mt-3">
+                            @php
+                            echo substr($save->instructions,0,40)
+                            @endphp
+                            ...
+                        </p>
+
+                        <a href="/ideas/{{$save->id}}" class="btn btn-sm btn-primary text-yellow">More Details</a>
+                    </div>
                 </div>
             </div>
+
+            @endforeach
+
+            <div class="row saved-ideas">
+                <div class="col d-flex justify-content-end">
+                    {{$saveIdeas->links()}}
+                </div>
+            </div>
+
         </div>
 
-        @endforeach
         @else
 
         <div class="mx-auto mt-5">
-            <h4><em class="text-muted">No ideas created yet....</em></h4>
+            <h4><em class="text-muted">No ideas saved yet....</em></h4>
         </div>
 
         @endif
+
+
     </div>
 
-
-
-    <div class="row">
-        <div class="col d-flex justify-content-end">
-            {{$ideas->links()}}
-        </div>
-    </div>
 </div>
 
 @endsection
-
-
-<script>
-    $('.toast').toast(option)
-</script>
